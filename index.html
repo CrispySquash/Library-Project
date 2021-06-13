@@ -19,12 +19,19 @@
     </div>
 
     <div id="modal-container" class="modal">
-        <div class="modal-content">
-            <input type="text" class="book-inputs" name="title" placeholder="Title">
-            <input type="text" class="book-inputs" name="author" placeholder="Author">
-            <input type="text" class="book-inputs" name="pages" placeholder="Pages">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+        <div id="modal-content">
+            <form id="modal-inputs" name='register-book'>
+                <input id='title' type="text" class="book-inputs" name="title" placeholder="Title">
+                <input id='author' type="text" class="book-inputs" name="author" placeholder="Author">
+                <input id='pages' type="text" class="book-inputs" name="pages" placeholder="Pages">
+                <span id="read-checkbox">
+                    <label for="read">Read: </label>
+                    <input type="checkbox" id="" name="read" value="yes">
+                </span>
+                <input type="submit" id="submit-btn" value="submit">
+                <button class="close">Close</button>
+            </form>
+            <p></p>
         </div>
     </div>
 
