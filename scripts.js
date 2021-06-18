@@ -22,7 +22,8 @@ let myLibrary = [];
 let newBook;
 
 //book constructor
-function Book(title, author, pages, read) {
+function Book(title, id, author, pages, read) {
+    this.id = '_' + Math.random().toString(36).substr(2, 9);
     this.title = titleValue;
     this.author = authorValue
     this.pages = pagesValue + ' pg/s';
@@ -89,7 +90,7 @@ window.onclick = function (e) {
     }
 }
 
-//iterates through array
+//iterates through array and performs the populate library function for each object
 myLibrary.forEach(populateLibrary)
 
 // function that creates/styles books from array
@@ -99,11 +100,13 @@ function populateLibrary(e) {
     let titleDiv = document.createElement('div');
     let authorDiv = document.createElement('div');
     let pagesDiv = document.createElement('div');
-    let readDiv = document.createElement('div');
+    let readBtn = document.createElement('button');
+    let closeBtn = document.createElement('button');
     let title = e.title;
     let author = e.author;
     let pages = e.pages;
     let read = e.read;
+    let bookId = e.id;
 
     bookDiv.classList = 'book';
     bookDiv.style.height = '200px'
@@ -116,16 +119,31 @@ function populateLibrary(e) {
     authorDiv.innerHTML = `Author: ${author}`;
     bookDiv.appendChild(pagesDiv);
     pagesDiv.innerHTML = `Pages: ${pages}`;
-    bookDiv.appendChild(readDiv);
+    bookDiv.appendChild(readBtn);
+    bookDiv.appendChild(closeBtn);
+    closeBtn.innerHTML = 'Close';
 
-    if (e.read === true) { readDiv.textContent = 'Read'; }
-    else { readDiv.textContent = 'Not Read'; }
+    closeBtn.addEventListener('click', () => {
+        // bookDiv.remove();
+        const index = myLibrary.findIndex(function (e) {
+            return e.id === "_9b46vz47k";
 
-    readDiv.addEventListener("click", function () {
+        })
+        console.log(index);
+        // myLibrary.splice(index, index >= 0 ? 1 : 0);
+        // if (index !== -1) myLibrary.splice(index, 1);
+        // getStorage();
+        populateStorage();
+    })
+
+    if (e.read === true) { readBtn.innerHTML = 'Read'; }
+    else { readBtn.innerHTML = 'Not Read'; }
+
+    readBtn.addEventListener("click", function () {
         e.read = !e.read;
 
-        if (e.read === true) { readDiv.textContent = 'Read'; }
-        else { readDiv.textContent = 'Not Read'; }
+        if (e.read === true) { readBtn.innerHTML = 'Read'; }
+        else { readBtn.innerHTML = 'Not Read'; }
     });
 
     console.log(read)
