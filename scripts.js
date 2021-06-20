@@ -101,7 +101,7 @@ function populateLibrary(e) {
     let authorDiv = document.createElement('div');
     let pagesDiv = document.createElement('div');
     let readBtn = document.createElement('button');
-    let closeBtn = document.createElement('button');
+    let removeBtn = document.createElement('button');
     let title = e.title;
     let author = e.author;
     let pages = e.pages;
@@ -112,28 +112,30 @@ function populateLibrary(e) {
     bookDiv.style.height = '200px'
     bookDiv.style.width = '160px'
     bookDiv.style.outline = 'solid';
+
+    titleDiv.innerHTML = `Title: ${title}`;
+    authorDiv.innerHTML = `Author: ${author}`;
+    pagesDiv.innerHTML = `Pages: ${pages}`;
+    removeBtn.innerHTML = 'Remove';
+
     library.appendChild(bookDiv);
     bookDiv.appendChild(titleDiv);
-    titleDiv.innerHTML = `Title: ${title}`;
     bookDiv.appendChild(authorDiv);
-    authorDiv.innerHTML = `Author: ${author}`;
     bookDiv.appendChild(pagesDiv);
-    pagesDiv.innerHTML = `Pages: ${pages}`;
     bookDiv.appendChild(readBtn);
-    bookDiv.appendChild(closeBtn);
-    closeBtn.innerHTML = 'Close';
+    bookDiv.appendChild(removeBtn);
 
-    closeBtn.addEventListener('click', () => {
-        // bookDiv.remove();
+    //deletes
+    removeBtn.addEventListener('click', () => {
         const index = myLibrary.findIndex(function (e) {
-            return e.id === "_9b46vz47k";
-
+            return e.id == bookId;
         })
+
         console.log(index);
-        // myLibrary.splice(index, index >= 0 ? 1 : 0);
-        // if (index !== -1) myLibrary.splice(index, 1);
-        // getStorage();
+        if (index !== -1) myLibrary.splice(index, 1);
+        library.innerHTML = '';
         populateStorage();
+        getStorage();
     })
 
     if (e.read === true) { readBtn.innerHTML = 'Read'; }
@@ -144,6 +146,7 @@ function populateLibrary(e) {
 
         if (e.read === true) { readBtn.innerHTML = 'Read'; }
         else { readBtn.innerHTML = 'Not Read'; }
+        populateStorage();
     });
 
     console.log(read)
