@@ -53,6 +53,7 @@ function validateInputs(e) {
     authorColor = document.forms["register-book"]["author"].style;
     pagesValue = document.forms["register-book"]["pages"].value;
     pagesColor = document.forms["register-book"]["pages"].style;
+    pagesValueTest = isNaN(pagesValue);
 
     if (titleValue == "" || titleValue == null) {
         titleColor.backgroundColor = "rgba(255, 0, 0, 0.41)";
@@ -66,8 +67,12 @@ function validateInputs(e) {
         pagesColor.backgroundColor = "rgba(255, 0, 0, 0.41)";
     } else { pagesColor.backgroundColor = ""; }
 
+    if (pagesValueTest) {
+        pagesColor.backgroundColor = "rgba(255, 0, 0, 0.41)";
+    } else { pagesColor.backgroundColor = ""; }
+
     if (titleValue == "" || titleValue == null || authorValue == "" ||
-        authorValue == null || pagesValue == "" || pagesValue == null) {
+        authorValue == null || pagesValue == "" || pagesValue == null || pagesValueTest) {
         return false;
     } else return true;
 }
@@ -111,7 +116,6 @@ function populateLibrary(e) {
     bookDiv.classList = 'book';
     bookDiv.style.height = '200px'
     bookDiv.style.width = '160px'
-    bookDiv.style.outline = 'solid';
 
     titleDiv.innerHTML = `Title: ${title}`;
     authorDiv.innerHTML = `Author: ${author}`;
